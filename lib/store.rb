@@ -1,10 +1,13 @@
 class Store < ActiveRecord::Base
 	has_many :employees
-	validates :name, :annual_revenue, presence: true, length: { minimum: 3 }
-	validate :income
- 
-  def income
-    annual_revenue.to_i < 0
-  end
+	validates :name, presence: true, length: { minimum: 3 }
+	validates :annual_revenue, numericality: { greater_than: 0 }
+	# validates :carry_items
+
+	# def carry_item
+	# 	if mens_apparel: false && womens_apparel: false
+	# 		errors.add(:mens_apparel, "must carry some items")
+	# 	end
+	# end
 
 end

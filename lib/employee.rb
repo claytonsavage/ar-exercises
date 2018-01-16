@@ -1,15 +1,8 @@
 class Employee < ActiveRecord::Base
 	belongs_to :store
 	validates :first_name, :last_name, :store, presence: true
-	validate :wage
-
-  def wage
-    if hourly_rate > 200
-      # errors.add(:hourly_rate, “cannot be above 200”)
-    elsif hourly_rate < 40
-      # errors.add(:hourly_rate, “cannot be below 40”)
-    end
-  end
+	validates :hourly_rate, numericality: { greater_than: 40 }
+	validates :hourly_rate, numericality: { less_than: 200 }
 end
 
 
